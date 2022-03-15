@@ -1,18 +1,13 @@
-//create todo list
-import React, { Component } from 'react';
-
-
-
-import logo from './logo.svg';
-import './App.css';
-//create todo list
+import React, { Component } from "react";
+import logo from "./logo.svg";
+import "./App.css";
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       todos: [],
-      newTodo: '',
-      filter: 'all'
+      newTodo: "",
+      filter: "all",
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -22,7 +17,7 @@ class App extends Component {
   }
   handleChange(e) {
     this.setState({
-      newTodo: e.target.value
+      newTodo: e.target.value,
     });
   }
   handleSubmit(e) {
@@ -30,43 +25,43 @@ class App extends Component {
     const newTodo = {
       id: Date.now(),
       text: this.state.newTodo,
-      completed: false
+      completed: false,
     };
     this.setState({
       todos: [...this.state.todos, newTodo],
-      newTodo: ''
+      newTodo: "",
     });
   }
   handleFilter(e) {
     this.setState({
-      filter: e.target.innerText.toLowerCase()
+      filter: e.target.innerText.toLowerCase(),
     });
   }
   handleDelete(id) {
-    const todos = this.state.todos.filter(todo => todo.id !== id);
+    const todos = this.state.todos.filter((todo) => todo.id !== id);
     this.setState({
-      todos
+      todos,
     });
   }
   handleToggle(id) {
-    const todos = this.state.todos.map(todo => {
+    const todos = this.state.todos.map((todo) => {
       if (todo.id === id) {
         todo.completed = !todo.completed;
       }
       return todo;
     });
     this.setState({
-      todos
+      todos,
     });
   }
   render() {
     const { todos, newTodo, filter } = this.state;
-    const filteredTodos = todos.filter(todo => {
-      if (filter === 'all') {
+    const filteredTodos = todos.filter((todo) => {
+      if (filter === "all") {
         return true;
-      } else if (filter === 'active') {
+      } else if (filter === "active") {
         return !todo.completed;
-      } else if (filter === 'completed') {
+      } else if (filter === "completed") {
         return todo.completed;
       }
     });
@@ -90,35 +85,35 @@ class App extends Component {
             <div className="todo-list__filter">
               <button
                 type="button"
-                className={filter === 'all' ? 'all' : ''}
+                className={filter === "all" ? "all" : ""}
                 onClick={this.handleFilter}
               >
                 All
               </button>
               <button
                 type="button"
-                className={filter === 'active' ? 'active' : ''}
+                className={filter === "active" ? "active" : ""}
                 onClick={this.handleFilter}
               >
                 Active
               </button>
               <button
                 type="button"
-                className={filter === 'completed' ? 'completed' : ''}
+                className={filter === "completed" ? "completed" : ""}
                 onClick={this.handleFilter}
               >
                 Completed
               </button>
             </div>
             <ul>
-              {filteredTodos.map(todo => (
+              {filteredTodos.map((todo) => (
                 <li key={todo.id}>
                   <input
                     type="checkbox"
                     checked={todo.completed}
                     onChange={() => this.handleToggle(todo.id)}
                   />
-                  <span className={todo.completed ? 'completed' : ''}>
+                  <span className={todo.completed ? "completed" : ""}>
                     {todo.text}
                   </span>
                   <button
@@ -133,11 +128,8 @@ class App extends Component {
           </div>
         </div>
       </div>
-
-
     );
   }
 }
-
 
 export default App;
